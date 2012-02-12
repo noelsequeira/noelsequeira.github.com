@@ -27,13 +27,13 @@
             padding: 20px;
             -moz-box-sizing: border-box;
             background: none repeat scroll 0 0 #FFFFFF;
-            border-radius: 6px 6px 6px 6px;
-            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);            
-            
+            border-radius: 3px;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
-        div.card.header 
+        div.card.header
         {
-            border-radius: 0px 0px 6px 6px;
+            border-radius: 0px 0px 3px 3px;
+            padding: 20px 20px 15px 20px;
         }
         body
         {
@@ -49,9 +49,35 @@
             width: 320px;
             margin: 0 auto;
         }
-        .row 
+        .row
         {
             margin-bottom: 20px;
+        }
+        .quick-links
+        {
+            list-style: none outside none;
+            margin: 0;
+            overflow: hidden;
+            text-align: left;
+        }
+        .quick-links li
+        {
+            color: #999999;
+            display: inline;
+            line-height: 35px;
+            margin: 0 10px 0 0;
+            vertical-align: middle;
+        }
+        .follow-btn
+        {
+            position: relative;
+            top: 5px;
+        }
+        .date
+        {
+            color: #AAAAAA;
+            float: right;
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -69,16 +95,27 @@
                     <hr style="margin-top:9px" />
                     -->
                     <img align="left" src="http://noelsequeira.s3.amazonaws.com/noel2-90.png" alt=""
-                        style="margin-right: 25px; border-radius: 6px;" />
+                        style="margin-right: 20px; border-radius: 3px;" />
                     <p id="about-header">
-                        Hi, I'm <a target="#blank" href="http://twitter.com/noelsequeira">Noel Sequeira</a>.
-                        I co-founded and bootstrapped <a target="#blank" href="http://creativeriot.com">Creative Riot Software</a>.<br />
+                        Hi, I'm <strong>Noel Sequeira</strong>.<br />
+                        I co-founded and bootstrapped <a target="#blank" href="http://creativeriot.com">Creative
+                            Riot Software</a>.<br />
                         I'm fascinated with how people interact with each other,<br />
                         how they interact with software, and what that means for entrepreneurs.<br />
-                        Here's where I chronicle my observations (and the occasional rant).<br />
-                        You should connect with me on <a target="#blank" href="https://twitter.com/intent/user?original_referer=&region=follow&screen_name=noelsequeira&source=followbutton&variant=2.0">
-                            Twitter</a>.
+                        We should connect. Hit me up on <a target="#blank" href="http://twitter.com/noelsequeira">
+                            Twitter</a>, or <a href="mailto:noel.sequeira+website@gmail.com">email me</a>!<br />
                     </p>
+                    <hr style="margin: 15px 0px 8px;" />
+                    <ul class="quick-links">
+                        <li><a href="#">Blog</a></li>
+                        <li>|</li>
+                        <li><a href="#">Projects</a></li>
+                        <li>|</li>
+                        <li><a href="#">About</a></li>
+                        <li>|</li>
+                        <li class="follow-btn"><a href="https://twitter.com/noelsequeira" class="twitter-follow-button"
+                            data-show-count="false"></a></li>
+                    </ul>
                 </div>
             </div>
             <!--/span-->
@@ -88,26 +125,67 @@
             <!--/span-->
         </div>
         <!--/row-->
-
         <div class="row">
             <div class="span2">
                 &nbsp;
             </div>
             <div class="span8">
                 <div class="card">
-                    <p>
-                        This website's smack in the middle of a (long, long overdue) overhaul. It'll be back up soon. In the meanwhile, feel free to get in touch with me on <a target="#blank" href="http://twitter.com/noelsequeira">Twitter</a>, or drop me an <a href="mailto:noel.sequeira+website@gmail.com">email</a>.
+                    <strong>Creative Riot Software</strong>
+                    <p class="date">
+                        2009 - Present</p>
+                    <hr style="margin: 15px 0px 8px;" />
                 </div>
             </div>
-            <!--/span-->
+        </div>
+        <!--/row-->
+        <div class="row">
+            <div class="span2">
+                &nbsp;
+            </div>
+            <div class="span4">
+                <div class="card">
+                    <strong>Enpower</strong>
+                    <hr style="margin: 15px 0px 8px;" />
+                </div>
+            </div>
+            <div class="span2">
+                <div class="card">
+                    <strong>Time Trove</strong>
+                    <hr style="margin: 15px 0px 8px;" />
+                </div>
+            </div>
+            <div class="span2">
+                <div class="card">
+                    <strong>CRMinbox</strong>
+                    <hr style="margin: 15px 0px 8px;" />
+                </div>
+            </div>
+            <div class="span2">
+                &nbsp;
+            </div>
+        </div>
+        <!--/row-->
+        <div class="row">
+            <div class="span2">
+                &nbsp;
+            </div>
+            <div class="span4">
+                <div class="card">
+                    <strong>Mumbai Blood Donors</strong>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="card">
+                    <strong>Time Trove</strong>
+                </div>
+            </div>
             <div class="span2">
                 &nbsp;
             </div>
             <!--/span-->
         </div>
-        <!--/row-->  
-
-
+        <!--/row-->
     </div>
     <!-- /container -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -123,6 +201,15 @@
             g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g, s)
         } (document, 'script'));
+    </script>
+    <script>
+        $(function () {
+            $.getScript("https://platform.twitter.com/widgets.js", function () {
+                //ensuring that the twitter follow buttons don't hijack the page load process
+                $(".twitter-follow-button").eq(0).width(155);
+                $(".follow-button").show();
+            });
+        });
     </script>
 </body>
 </html>
