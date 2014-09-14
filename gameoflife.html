@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Canvas tutorial</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      gameOfLife();
+    });
+
+
+    function gameOfLife() {
+
+
+      var cellSize = 10;
+      var canvas = document.getElementById("canvas");
+      var windowWidth = $(window).width() - 20 - ($(window).width() % cellSize);
+      var windowHeight = $(window).height() - 20 -  ($(window).height() % cellSize);
+      canvas.width = $(window).width() - 20;
+      canvas.height = $(window).height() - 20;
+      console.log(windowWidth);
+      console.log(windowHeight);
+
+      var width = windowWidth / cellSize;
+      var height = windowHeight / cellSize
+      var gameOfLifeBoard = new Array();
+
+
+      if (canvas.getContext) {
+
+        var context = canvas.getContext("2d");
+
+        function setupGrid() {
+
+          for (var x = 0.5; x <= windowWidth + 0.5; x += cellSize) {
+            context.moveTo(x, 0);
+            context.lineTo(x, windowHeight + 0.5);
+          }
+
+          for (var y = 0.5; y <= windowHeight + 0.5; y += cellSize) {
+            context.moveTo(0, y);
+            context.lineTo(windowWidth + 0.5, y);
+          }
+
+          context.strokeStyle = "#ddd"
+          context.stroke();
+
+        }
+
+        function setupRandomInitialConditions() {
+          for (var x = 0; x < width; x++) {
+            for (var y = 0; y < height; y++) {
+              if (Math.random() > 0.8) {
+                gameOfLifeBoard[x][y].birth();
+              }
+            }
+          }
+        }
+
+        function setupGame() {
+          setupGrid();
+
+          for (var x = 0; x < width; x++) {
+            var gameOfLifeBoardRow = [];
+            for (var y = 0; y < height; y++) {
+              gameOfLifeBoardRow.push(new Cell(x, y))
+            }
+            gameOfLifeBoard.push(gameOfLifeBoardRow);
+          }
+
+          setupRandomInitialConditions();
+        }
+
+        function Cell(x, y) {
+          this.x = x;
+          this.y = y;
+          this.currentState = 0;
+          this.futureState = 0;
+
+          this.birth = function() {
+            this.currentState = 1;
+            context.fillRect(x * cellSize + 0.5, y * cellSize + 0.5, cellSize, cellSize);
+          }
+
+          this.kill = function() {
+            this.currentState = 0;
+            context.clearRect(x * cellSize + 0.5, y * cellSize + 0.5, cellSize, cellSize);
+          }
+
+          this.getNeighbors = function() {
+            var neighbors = [];
+
+            for (var i = x - 1; i <= x + 1; i++) {
+              for (var j = y - 1; j <= y + 1; j++) {
+                // console.log("i,j: "+i + "," + j);
+                // console.log(" width:" + width);
+                // console.log(" height:" + height);
+                if (i >= 0 && i < width && j >= 0 && j < height && !(i === x && j === y)) {
+                  neighbors.push([i, j]);
+                }
+              }
+            }
+            return neighbors;
+          }
+
+          this.getLiveNeighborCount = function() {
+            var neighbors = this.getNeighbors();
+            var liveNeighborCount = 0;
+            for (var i = 0; i < neighbors.length; i++) {
+              if (gameOfLifeBoard[neighbors[i][0]][neighbors[i][1]].currentState === 1) {
+                ++liveNeighborCount;
+              }
+            }
+            return liveNeighborCount;
+          }
+
+          this.setFutureState = function() {
+            var liveNeighborCount = this.getLiveNeighborCount();
+            if (liveNeighborCount > 3 || liveNeighborCount < 2) {
+              this.futureState = 0; //death by overcrowding or loneliness
+            } else {
+              if (liveNeighborCount === 3) {
+                this.futureState = 1;
+              } else { //count === 2
+                //console.log(liveNeighborCount);
+                this.futureState = this.currentState;
+              }
+            }
+            return (this.futureState);
+          }
+
+          this.updateState = function() {
+            if (this.currentState === this.futureState) {
+              //console.log("No change!")
+            } else {
+              this.currentState = this.futureState;
+              if (this.currentState === 0) {
+                this.kill();
+              } else {
+                this.birth();
+              }
+            }
+          }
+        }
+
+
+        function universeCounter() {
+          var count = 0;
+          //console.log("Iteration: " + count);
+          return function() {
+            ++count;
+            //console.log("Iteration: " + count);
+            for (var y = 0; y < height; y++) {
+              for (var x = 0; x < width; x++) {
+                //console.log("Count: " + count + " ");
+                var fs = gameOfLifeBoard[x][y].setFutureState();
+                //console.log("Future State of " + x + "," + y + ": " + fs);
+
+              }
+            }
+            //console.log("All future States Updated");
+            for (var y = 0; y < height; y++) {
+              for (var x = 0; x < width; x++) {
+                gameOfLifeBoard[x][y].updateState();
+              }
+            }
+          }
+
+        }
+
+        setupGame();
+
+
+        setInterval(universeCounter(), 50);
+
+        //universeCounter()();
+        //universeCounter()();
+        //universeCounter()();
+
+        return gameOfLifeBoard;
+
+      }
+
+
+    }
+  </script>
+  <style type="text/css">
+    canvas {
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas">
+  </canvas>
+</body>
+
+</html>
