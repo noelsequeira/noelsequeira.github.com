@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Conway's Game of Life</title>
+  <link rel="stylesheet" href="css/foundation.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="js/gameoflife.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      var gameOfLifeAPI = createGameOfLifeAPI();
+
+      $("#startButton").click(function() {
+        gameOfLifeAPI.start();
+      });
+
+      $("#stopButton").click(function() {
+        gameOfLifeAPI.stop();
+      });
+
+      $("#resetButton").click(function() {
+        gameOfLifeAPI.reset();
+      });
+
+      $("#randomizeButton").click(function() {
+        gameOfLifeAPI.randomize();
+      });
+
+    });
+  </script>
+
+  </script>
+  <style type="text/css">
+    div.cell {
+      float: left;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      border: 1px solid #ccc;
+    }
+    #wrapper {
+      float: none;
+      border: none;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    #board {
+      width: 600px;
+      height: 600px;
+      border: 1px solid #ccc;
+      float: left;
+      box-sizing: content-box;
+      /*margin: 10px 10px;*/
+    }
+    #controls {
+      width: 400px;
+      height: 600px;
+      float: left;
+      margin-left: 30px;
+    }
+    hr {
+      margin: 0px 0px 1.25rem 0px;
+    }
+    p {
+      float: left;
+      margin-bottom: 0.75rem;
+    }
+    .button {
+      margin-right: 0.75rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="board">
+    </div>
+    <div id="controls">
+      <h4 id="title">Conway's Game of Life</h4>
+      <hr/>
+      <p style="font-weight: bold;">Setting Up Initial Conditions:</p>
+      <br style="clear: both;" />
+      <p>1. You can set up random starting conditions for the game by clicking on the button below:</p>
+      <br style="clear: both;" />
+      <button id="randomizeButton" class="button radius" type="button">Randomize Initial State</button>
+      <br style="clear: both;" />
+      <p style="font-weight: bold;">OR</p>
+      <p style="background-color: lightyellow;">2. <b>(BONUS FEATURE!!!)</b> When the game is stopped, you bring any cell to life or kill it by clicking on it!</p>
+      <br style="clear: both;" />
+      <hr/>
+      <a href="#" id="startButton" class="button radius success" type="button">START</a>
+      <a href="#" id="stopButton" class="button radius alert" type="button">STOP</a>
+      <a href="#" id="resetButton" class="button radius" type="button">CLEAR</a>
+      <br/>
+      <p>Generation:&nbsp;</p>
+      <p id="counter">0</p>
+      <hr />
+      <div class="panel callout radius">
+        <p style="float:none;">To learn more about Conway's Game of Life,
+          <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life" target="_blank">visit the Wikipedia article</a>.</p>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>
