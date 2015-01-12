@@ -1,112 +1,95 @@
 .container {
-  max-width:720px;
+  max-width: 720px;
 }
-
 h1.title {
   padding-top: 10px;
   font-size: 42px;
 }
-
 body {
   background: #f8f8f8;
 }
-
 #header {
   background: #fff;
   margin-bottom: 0px;
   border: 0px;
 }
-
-
 #content {
   background: #f8f8f8;
   border-top: 1px solid #ddd;
   box-shadow: inset 0 10px 5px -10px rgba(0, 0, 0, .1);
   padding-top: 36px;
 }
-
 #content .text {
   position: relative;
   top: -40px;
-  font: normal 18px/30px georgia,serif;
+  font: normal 18px/30px georgia, serif;
   display: none;
 }
-
 #profile {
   margin: 20px 0px;
   width: 100px;
 }
-
 .navbar-nav {
   margin-top: 30px;
 }
-
 .navbar-nav>li {
   display: inline;
 }
-
 .navbar-nav>li>a.current {
   /*border-bottom: 3px solid #888;*/
 }
-
 .navbar-default .navbar-nav>li>a {
-  color: #888;
+  color: #a5a5a5;
   font-weight: 500;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
 }
-
 .icon {
   font-size: 22px;
   display: block;
   margin-bottom: 6px;
   text-align: center;
 }
-
-.iconlabel.current  {
+.iconlabel.current {
   font-weight: 500;
   border-bottom: 3px solid;
   padding-bottom: 8px;
 }
-
 .navbar-toggle {
-  margin-top:45px;
+  margin-top: 45px;
   margin-right: 0px;
 }
-
 .container>.navbar-header, .container-fluid>.navbar-header, .container>.navbar-collapse, .container-fluid>.navbar-collapse {
   margin-left: 0px;
   margin-right: 0px;
 }
-
 #content hr {
   border-top: 1px solid #D5D5D5;
   border-bottom: 1px solid #FFFFFF;
 }
-
 .project > div {
   border: 1px solid rgba(136, 136, 136, 0.59);
   margin-top: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   background: #fff;
   border-radius: 0px;
   box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.2);
-  padding: 12px 20px;
-  font: normal 16px georgia,serif;
-
+  padding: 20px;
+  font: normal 16px georgia, serif;
 }
-
 .project-header {
   margin-bottom: 14px;
 }
-
+.project-caption {
+  margin: 10px 0px 20px 0px;
+  font-size: 16px;
+}
 .project-header hr {
   position: relative;
   top: 17px;
   margin: 0px;
 }
-
 .project-header span {
   position: relative;
   top: 0px;
@@ -114,9 +97,40 @@ body {
   color: #777;
   font-size: 14px;
   letter-spacing: 2px;
-  margin-left: 20px;
   background-color: #f8f8f8;
-  padding: 0px 18px;
+  padding: 0px 18px 0px 0px;
   margin-right: 20px;
   font-family: "proxima-nova", Arial, sans-serif;
+}
+.carousel.fade {
+  opacity: 1;
+}
+.carousel.fade .item {
+  -moz-transition: opacity ease-in-out .7s;
+  -o-transition: opacity ease-in-out .7s;
+  -webkit-transition: opacity ease-in-out .7s;
+  transition: opacity ease-in-out .7s;
+  left: 0 !important;
+  opacity: 0;
+  top:0;
+  position:absolute;
+  width: 100%;
+  display:block !important;
+  z-index:1;
+}
+.carousel.fade .item:first-child {
+  top:auto;
+  position:relative;
+}
+.carousel.fade .item.active {
+  opacity: 1;
+  -moz-transition: opacity ease-in-out .7s;
+  -o-transition: opacity ease-in-out .7s;
+  -webkit-transition: opacity ease-in-out .7s;
+  transition: opacity ease-in-out .7s;
+  z-index:2;
+}
+
+.bx-wrapper .bx-viewport {
+  box-shadow: none !important;
 }
