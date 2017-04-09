@@ -9,7 +9,7 @@ $('.collapse').on('show.bs.collapse', function() {
 $(document)
 	.ready(function() {
 
-		$("#content .text")
+		/*$("#content .text")
 			.fadeIn(2000)
 			.animate({
 				'top': '0px'
@@ -21,6 +21,6 @@ $(document)
 
 		$('.carousel').carousel({
 			interval: 2000
-		});
+		});*/
 
 	});
